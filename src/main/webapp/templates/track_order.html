@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orderbid.com | Delivery Boy</title>
+<script src="components/angular/angular.js"></script>
+<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+<link rel="stylesheet" href="css/layout.css" type="text/css" />
+<link rel="stylesheet" href="css/datepicker.css" type="text/css" />
+<link rel="stylesheet" href="css/font-awesome.css" type="text/css" />
+<script src="js/jquery-1.11.3.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/moment.js"></script>
+<script src="js/bootstrap-datetimepicker.js"></script>
+<!-- /////////////////// -->
+<script src="components/angular/angular.js"></script>
+<!-- ///////////////// -->
+</head>
+<body ng-app="orderbid">
+<div id="wrapper-track-order" ng-controller="TrackOrderCtrl" data-ng-init="getLoggedIn()">
+	<header class="navbar navbar-inverse">
+		<div class="container">
+			<div class="repeater">
+				<button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+				
+				<a href="#" class="navbar-brand pull-left">Track your  OrderNo</a> <a href="#" class="pull-right refresh"><i class="fa fa-refresh"></i></a> </div>
+				
+			</div>
+  
+	
+	</header>
+
+	<nav>
+		<div class="container">
+			<div class="repeater">
+				<div class="search-group">
+					<input type="search" id="search" ng-model="orderNo" placeholder="Search your order id">
+					<i class="fa fa-search"></i>
+				</div>
+			</div>
+		</div>
+	</nav>
+	
+	
+
+<section>
+	<div class="container">
+		<div class="repeater">
+			<div class="repeater">
+				<ul class="form-box">
+					<li><a href="#" class="logo" alt="Order bid" title="Order bid"></a></li>
+<li><select><option>Select status</option><option>Select status</option><option>Select status</option><option>Select status</option></select></li>
+<li><button type="button" ng-click="getOrderNoDetails();" name="" class="btn btn-primary">SUBMIT</button></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+
+<footer style="margin-top:-8px;">
+	
+
+	<p>Order ID - ATAP05895</p>
+	<p>06 FEB 2016 @01:08PM</p>
+	<p>Swarnadeep Apartment Flat no - 38 Keshav nagar, Pune - 411036</p>
+	
+</footer>
+
+</div>
+
+<script>
+ $(function () {
+	var header = $('header').height();
+	var footer = $('footer').height();
+	var nav =   $('nav').height();
+	var section =   $(document).height();
+	var main =   $(document).height();
+	var totalehHeight = main - header - footer - 92 ;
+	$('section').css('height', totalehHeight + 'px');
+
+});
+</script>
+ 
+</body>
+</html>

@@ -1,0 +1,83 @@
+<div class="activestrip strip">
+<ul>
+<li><i>Registered Eseller </i>  <span>{{activeEsselCount}}</span></li>
+	<li><i>Registered Logistic</i><span>{{activeLogisCount}}</span></li>
+	<li><i>Eseller Kyc Completed</i><span>{{esselKycCompletedCount}}</span></li>
+	<li><i>Eseller Kyc Incompleted </i><span>{{esselKycIncompletedCount}}</span></li>
+	<li><i>Logistic Kyc Completed</i><span>{{logisKycCompletedCount}}</span></li>
+	<li><i>Logistic Kyc Incompleted</i><span>{{logisKycIncompletedCount}}</span></li>
+	</ul>
+</div>
+<br>
+<h3>
+	Activate/Deactivate company account
+</h3>
+
+<div class="data-container">
+<table class="table table-striped" ng-init="getCompanies();getActivateEselLogis();getEsselLogiskycStatus();">
+<thead>
+      <tr>
+        <th>Logo</th>
+        <th>Company Name</th>
+        <th>Check KYC</th>
+        <th>Activate / Deactivate</th>
+      </tr>
+    </thead>
+		<tbody>
+			<tr ng:repeat="company in companies">
+				<td><span class="user-icon"><i class="fa fa-user"></i></span>
+				<td><p>
+						<b>{{company.name}}</b> ({{company.typeStr}})</p>
+				</td>
+				<td>
+					<p ng-if="company.kycFlag == 1 && company.type != 0"><b>KYC verified</b>&nbsp;<a href ng-click="openKycDetails(company.id)">(kyc details)</a></p>
+					<p ng-if="company.kycFlag == 0 && company.type != 0"><b><a href ng-click="openKycDetails(company.id)">check kyc details</a></b></p>
+				</td>
+				<td><input ng-if="company.type != 0" type="checkbox" class="activateSwitch" ng-model="company.activeBool" bs-switch 
+				ng-change="changeCompanyStatus(company)"/></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+ <div class="modal fade" id="KYCModel" tabindex="-1" role="dialog" arialabelby="KYCModel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span arial-hidden="true" class="fa fa-times"></span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">KYC documents</h4>
+			</div>
+			<div class="modal-body">
+				<form>
+					  <div class="form-group row">
+					    <label class="col-sm-4 form-control-label">address proof</label>
+					    <div class="col-sm-8">
+					    	<textarea class="form-control" rows="5" cols="50" ng-model="kyc.addressProof" readonly></textarea>
+					    </div>
+					  </div>
+					  <div class="form-group row">
+					    <label for="inputPassword" class="col-sm-4 form-control-label">ID proof</label>
+					    <div class="col-sm-8">
+					     	<textarea class="form-control" rows="5" cols="50" ng-model="kyc.idProof" readonly></textarea>
+					    </div>
+					  </div>
+					  <div class="form-group row">
+					    <label for="inputPassword" class="col-sm-4 form-control-label">Cancelled cheque</label>
+					    <div class="col-sm-8">
+					      <textarea class="form-control" rows="5" cols="50" ng-model="kyc.idProof" readonly></textarea>
+					    </div>
+					  </div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" ng-if="kyc.company.kycFlag == 0"
+					data-dismiss="modal" aria-label="Close" ng-click="approveKYC(kyc.company.id)">Approve</button>
+					<button type="button" class="btn btn-primary"
+					data-dismiss="modal" aria-label="Close">Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>

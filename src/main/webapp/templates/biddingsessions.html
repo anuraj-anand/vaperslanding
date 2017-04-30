@@ -1,0 +1,63 @@
+<h3>
+	Bidding sessions
+</h3>
+<div class="panel panel-info">
+	<div class="panel-heading">Session hours</div>
+	<div class="panel-body">
+		<form class="form-horizontal" role="form">
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="email">Days</label>
+				<div class="col-sm-5">
+					 <div ng-repeat="day in days">
+					 	<label><input type="checkbox" checklist-model="sessions.days" ng-click="checkDay(day, this)" checklist-value="day"/> &nbsp;{{day}}</label>
+				    </div>
+				</div>
+				<div class="col-sm-5">
+					<label class="control-label col-sm-2" for="pwd">Sessions start at</label>
+					<uib-timepicker ng-model="fromTime" ng-change="changed()" 
+					hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+					<label class="control-label col-sm-2" for="pwd">Sessions ends at</label>
+					<uib-timepicker ng-model="toTime" ng-change="changed()" 
+					hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+				</div>
+			</div>
+		<!-- 	<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">Sessions start at</label>
+				<div class="col-sm-4">
+					<uib-timepicker ng-model="mytime" ng-change="changed()" 
+					hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+				</div>
+				<label class="control-label col-sm-2" for="pwd">Sessions ends at</label>
+				<div class="col-sm-4">
+					<uib-timepicker ng-model="mytime" ng-change="changed()" 
+					hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+				</div>
+			</div> -->
+			<div class="form-group">
+				<div class="col-sm-5"></div>
+				<div class="col-sm-2"><button type="submit" class="btn btn-info" ng-click="addBiddingSession()">Create bidding session</button></div>
+				<div class="col-sm-5"></div>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="data-container">
+	<table class="table table-striped" ng-init="getBiddingSessions()">
+<thead>
+      <tr>
+        <th>Day</th>
+        <th>Start time</th>
+        <th>End time</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+		<tbody>
+			<tr ng:repeat="biddingSession in biddingSessions">
+				<td><b>{{biddingSession.day}}</b></td>
+				<td>{{biddingSession.fromTime}}</td>
+				<td>{{biddingSession.toTime}}</td>
+				<td><a ng-click="deleteBiddingSession(biddingSession)" style="cursor:pointer;"><i class="fa fa-remove"></i></a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

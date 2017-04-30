@@ -1,0 +1,61 @@
+<!-- RSA Security -->
+<script type="text/javascript" src="components/rsa/jsbn.js"></script>
+<!--needed for rsa math operations-->
+<script type="text/javascript" src="components/rsa/rng.js"></script>
+<!--needed for rsa key generation-->
+<script type="text/javascript" src="components/rsa/prng4.js"></script>
+<!--needed for rsa key generation-->
+<script type="text/javascript" src="components/rsa/rsa.js"></script>
+<script type="text/javascript" src="app-js/BidedOrdersCtrl.js"></script>
+
+
+<h2 align="center">
+	Broadcasting Message
+</h2>
+<div class="panel panel-success"  ng-init="getUsernamelist();">
+	<div class="panel-heading"></div>
+	<div class="panel-body">
+		
+			
+		<div class="form-group">	
+			<div class="col-sm-6">
+				<label ng-if="loggedIn.company.type==0">Select User From List</label>
+				
+				<select multiple="multiple"
+							class="form-control form-select" name="shiVals" id="userselected"
+							ng-model="Username" 
+							data-ng-options="x.id +'-'+ x.name  for x in usernames">
+						</select> 
+				<!-- <select id="userselected" multiple ng-model="Username"  name="Username" ng-if="loggedIn.company.type==0" ng-options="x.name for x in usernames"></select> -->
+			 
+</div>
+
+
+<div class="col-sm-6">
+				<label ng-if="loggedIn.company.type==0">Message</label><input type="text" placeholder="Enter The Message" name="Message" ng-if="loggedIn.company.type==0"  id="B_message" ng-model="Bmessage"/>
+</div>
+</div>
+
+
+				
+				<div class="col-sm-3">
+				<button ng-if="loggedIn.company.type==0" type="button" class="btn btn-primary" ng-click="SaveNotification()">Send Message</button>
+				</div>
+				<div class="col-sm-9">
+					
+				</div>
+			
+				
+				
+		
+	
+			
+			
+			
+			
+		
+	</div>
+</div>
+
+
+

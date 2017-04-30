@@ -1,0 +1,71 @@
+<h2>
+	Users
+
+</h2>
+
+<div class="filter-box">
+	<div class="pull-left col-lg-6 col-md-6 col-sm-6">
+		<a href="#" class="pull-left"><i class="fa fa-filter"></i></a> 
+		<a href="#" class="pull-left"><i class="fa fa-sort-amount-desc"></i></a>
+	</div>
+	<div class="pull-right col-lg-6 col-md-6 col-sm-6">
+		<a class="blue pull-right" ng-click="openNewUserPopup()">New user</a> 
+		<input type="search" name="search" class="pull-right" placeholder="search"/>
+	</div>
+</div>
+
+<table class="grid" ng-init="getAllUsers()">
+	<tbody>
+		<tr ng:repeat="user in allUsers">
+			<td><span class="user-icon"><i class="fa fa-user"></i></span>
+			<td>
+			<td><p>{{user.userName}}</p>
+			</td>
+			<td><p>{{user.mobile}}</p>
+			</td>
+			<td><p>{{user.email}}</p>
+			</td>
+			<td><p>{{user.type}}</p>
+			</td>
+			<td><p><span class="blue-box" ng-click="resetPassword(user)">Reset password</span>&nbsp;<span class="blue-box" ng-click="editUser(user)">Edit</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<div class="modal fade" id="createNewUser" tabindex="-1" role="dialog" arialabelby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span arial-hidden="true" class="fa fa-times"></span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">Add user</h4>
+			</div>
+			<div class="modal-body">
+
+				<form action="" name="">
+					<ul class="form-box">
+						<li><input type="text" placeholder="Username" ng-model="user.userName" required></li>
+					<!-- 	<li><input type="text" placeholder="Logistics Name"></li>
+						<li><input type="text" placeholder="Order ID"></li> -->
+						<li><input type="text" placeholder="Email address" ng-model="user.email" required></li>
+						<li><input type="text" placeholder="Mobile" ng-model="user.mobile" required></li>
+						<li>
+							<select id="usertype" ng-model="user.type" required>
+								<option value="1">Admin</option>
+								<option value="2">Bidder</option>
+								<option value="3">Delivery boy</option>
+							</select>
+						</li>
+					</ul>
+				</form>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary pull-right" ng-click="addUser()">Update</button>
+			</div>
+		</div>
+	</div>
+</div>

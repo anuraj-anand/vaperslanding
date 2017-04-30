@@ -1,0 +1,71 @@
+<ul class="nav nav-tabs" style="margin-top:20px;">
+  <li class="active" ng-repeat="i in range.slice(0, tabCount) track by $index"><a data-toggle="tab" href="#watch1">Watch {{$index+1}}</a></li>
+  <li><a href="#home" class="pull-left blue ng-scope">back to dashboard</a></li>
+</ul>
+<div class="tab-content">
+  <div id="watch1" class="tab-pane fade in active">
+    <div class="data-container">
+
+	<div ng-include="'templates/filter.html'"></div>
+	<div class="table-responsive" ng-init="getWatches()">          
+	  <table class="table table-striped table-bordered table-hover">
+	    <thead>
+	      <tr>
+	      	<th></th>
+	        <th>Sr.No.</th>
+	        <th>Order.No.</th>
+	        <th>Item symbol</th>
+	        <th>Shipment date</th>
+	        <th>Delivery date</th>
+	        <th>Pkg weight</th>
+	        <th>Zip from</th>
+	        <th>Zip to</th>
+	        <th>Ask Qty</th>
+	        <th>Ask Rate</th>
+	        <th>Bid Qty</th>
+	        <th>Bid Rate</th>
+	        <th>Time</th> 
+	        <th>Last bid price</th>       
+	        <th>Delivery days</th> 
+	        <th>Code</th>      
+	        <th ng-if="loggedIn.company.type!=1">Actions</th>       
+	      </tr>
+	    </thead>
+	    <tbody>
+	      	<tr ng:repeat="orderVo in watchedOrders">
+	      		<td><input type="checkbox" name="check" class="pull-left" id="{{orderVo.order.id}}_check_watch"/></td>
+		        <td>{{orderVo.order.srNo}}</td>
+		        <td>{{orderVo.order.orderNo}}</td>
+		        <td>{{orderVo.order.itemSymbol}}</td>
+		        <td>{{orderVo.order.shipmentDate | date:'shortDate'}}</td>
+		        <td>{{orderVo.order.deliveryDate | date:'shortDate'}}</td>
+		        <td>{{orderVo.order.weight}} G</td>
+		        <td>{{orderVo.order.sourcePin}}</td>
+		        <td>{{orderVo.order.destPin}}</td>
+		        <td class="info">{{orderVo.order.askQuantity}}</td>
+		        <td class="info">{{orderVo.order.askRate}} Rs.</td>
+		        <td class="danger">{{orderVo.order.maxBidVO.bidQuanitity}}</td>
+		        <td class="danger">{{orderVo.order.maxBidVO.bidAmt}}&nbsp;Rs.</td>
+		        <td>1:12:40</td>
+		        <td><p ng-if="loggedIn.company.type!=1"><span ng-if="order.maxUserBidVO != null">{{orderVo.order.maxUserBidVO.bidAmt}}&nbsp;Rs.</span></p></td>
+		        <td>{{orderVo.order.deliveryDays}}</td>
+		        <td>{{orderVo.order.uuid}}</td>
+		        <td ng-if="loggedIn.company.type!=1">
+		        <span ng-if="!bidEnabled" class="grey-box">Bid</span>
+		        <span ng-if="bidEnabled" class="blue-box" ng-click="openBidPopup(order.orderNo, order.maxBidVO.bidAmt, order.maxUserBidVO.bidAmt, order.askRate)">Bid</span></td>
+		      </tr>
+	    </tbody>
+	  </table>
+	</div>
+
+</div>
+  </div>
+  <div id="watch2" class="tab-pane fade">
+    <h3>Menu 1</h3>
+    <p>Some content in menu 1.</p>
+  </div>
+  <div id="watch3" class="tab-pane fade">
+    <h3>Menu 2</h3>
+    <p>Some content in menu 2.</p>
+  </div>
+</div>

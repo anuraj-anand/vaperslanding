@@ -1,0 +1,369 @@
+<h2>
+	Account
+</h2>
+
+<div class="panel panel-success" ng-init="getAccountInfo()">
+
+<div class="panel-heading">Upload Profile Picture:</div>
+	<div class="panel-body">
+<form class="form-horizontal" role="form">
+<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd"></label>
+				<div class="col-sm-6">
+<!-- 					<textarea class="form-control" rows="2" cols="50" placeholder="Copy and paste here your cancelled cheque"  ng-model="account.kyc.cancelledCheque"></textarea> -->
+								<input  type="file" id="profilePicture" onchange="angular.element(this).scope().uploadProfilePics(this)">
+				</div>
+<!-- 				<div class="col-sm-2">OR</div> -->
+<!-- 				<div class="col-sm-4"> -->
+<!-- 					 <button type="button" class="btn btn-primary" ng-click="savePrimaryInfo()">Upload</button> -->
+<!-- 				</div> -->
+				<div class="col-sm-4"> 
+					<a class="pointer" ng-click="selectDocument('profilePicture')"  data-toggle="modal" data-target="#viewuploadeddocumentsmodal">View Profile Picture</a> 
+				</div>
+			</div>
+<!-- <div class="panel-body">
+
+<form class="form-horizontal" role="form">
+<div class="form-group col-xs-12">
+					<div class="col-xs-8">
+						<div class="form-group has-feedback">
+							<label class="control-label" for="inputValidation">Profile Picture</label>  <div>
+        <input type="file" id="dvPreview">
+        <hr />
+       
+       
+    </div>
+						</div>
+						</div>
+						
+						<div class="col-xs-4"> 
+						<div id="dvPreview">
+        </div></div>
+					</div>
+					
+					
+					<div class="form-group">
+				<div class="col-sm-2">
+				<button type="button" class="btn btn-primary" ng-click="saveProfilePics()">Save Profile Picture</button>
+				</div>
+				<div class="col-sm-10">
+					
+				</div>
+			</div>
+					</form>
+</div>
+ -->
+
+
+<!-- 
+	<div class="panel-heading">Edit Profile Picture</div>
+	<div class="panel-body">
+		<form class="form-horizontal" role="form">
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="email">Your display name:</label>
+				<div class="col-sm-10">
+					<input ng-model="account.display.displayName" type="text" class="form-control" id="displayname" placeholder="Tell us your display name for others"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">Describe your business:</label>
+				<div class="col-sm-10">
+					<textarea class="form-control" rows="2" cols="50" placeholder="Tell us about your business" ng-model="account.display.businessDesc"></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">Returns and refund policy:</label>
+				<div class="col-sm-10">
+					<a href ng-click="openReturnPolicy()">Click here for return policy</a>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-10">
+					<button type="button" class="btn btn-primary" ng-click="saveDisplayInfo()">Save</button>
+				</div>
+			</div>
+		</form>
+	</div -->
+	
+	<div class="form-group">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-10">
+					<button type="button" class="btn btn-primary" ng-click="saveProfilePics()">Save</button>
+				</div>
+			</div>
+	</form>
+</div>
+
+</div>
+
+
+
+
+
+<div class="panel panel-success" ng-init="getAccountInfo()">
+
+
+
+
+
+	<div class="panel-heading">Display information</div>
+	<div class="panel-body">
+		<form class="form-horizontal" role="form">
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="email">Your display name:</label>
+				<div class="col-sm-10">
+					<input ng-model="account.display.displayName" type="text" class="form-control" id="displayname" placeholder="Tell us your display name for others"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">Describe your business:</label>
+				<div class="col-sm-10">
+					<textarea class="form-control" rows="2" cols="50" placeholder="Tell us about your business" ng-model="account.display.businessDesc"></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">Returns and refund policy:</label>
+				<div class="col-sm-10">
+					<a href ng-click="openReturnPolicy()">Click here for return policy</a>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-10">
+					<button type="button" class="btn btn-primary" ng-click="saveDisplayInfo()">Save</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="panel panel-success">
+	<div class="panel-heading">Pickup address</div>
+	<div class="panel-body">
+		<form class="form-horizontal" role="form">
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="email">Address Line 1:</label>
+				<div class="col-sm-10">
+					<textarea class="form-control" rows="2" cols="50" placeholder="Your pickup address 1" ng-model="account.pickup.addressLine1"></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">Address Line 2:</label>
+				<div class="col-sm-10">
+					<textarea class="form-control" rows="2" cols="50" placeholder="Your pickup address 2" ng-model="account.pickup.addressLine2"></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">Pin code:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="pincode" placeholder="Enter your pin code" ng-model="account.pickup.pinCode"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">Your pickup city:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="pickupCity" placeholder="tell us your city" ng-model="account.pickup.city"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-10">
+					<button type="button" class="btn btn-primary" ng-click="savePickupInfo()">Save</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="panel panel-success">
+	<div class="panel-heading">Primary contact</div>
+	<div class="panel-body">
+		<form class="form-horizontal" role="form">
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">Your name:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="primaryContact" placeholder="Enter name" ng-model="account.primary.primaryName"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">Your mobile number:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="primaryMobile" placeholder="Enter mobile number" ng-model="account.primary.primaryMobile"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">Your email address:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="primaryEmail" placeholder="Enter email address" ng-model="account.primary.primaryEmail"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-10">
+					<button type="button" class="btn btn-primary" ng-click="savePrimaryInfo()">Save</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="panel panel-success">
+	<div class="panel-heading">Bank account</div>
+	<div class="panel-body">
+		<form class="form-horizontal" role="form">
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">Account holder name</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="accountHolderName" placeholder="Enter account holder name" ng-model="account.bank.accountHolderName"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">Account number:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="accountNumber" placeholder="Enter account number" ng-model="account.bank.accountNumber"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">Bank name:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="bankName" placeholder="Enter bank name" ng-model="account.bank.bankName"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">Bank city:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="bankCity" placeholder="Enter bank city" ng-model="account.bank.city"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">Bank branch:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="bankBranch" placeholder="Enter bank branch" ng-model="account.bank.branch"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">Bank IFSC code:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="bankIfsc" placeholder="Enter bank IFSC code" ng-model="account.bank.ifscCode"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-10">
+					<button type="button" class="btn btn-primary" ng-click="saveBankInfo()">Save</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="panel panel-success">
+	<div class="panel-heading">KYC documents</div>
+	<div class="panel-body">
+		<form class="form-horizontal" role="form">
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">Upload address proof:</label>
+				<div class="col-sm-6">
+<!-- 					<textarea class="form-control" rows="2" cols="50" placeholder="Copy and paste here your address proof"  ng-model="account.kyc.addressProof"></textarea> -->
+				<input  type="file" id="addressproof" onchange="angular.element(this).scope().uploadKycDocuments(this)">
+				</div>
+<!-- 				<div class="col-sm-2">OR</div> -->
+<!-- 				<div class="col-sm-4"> -->
+<!-- 					<button type="button" class="btn btn-primary" ng-click="savePrimaryInfo()">Upload</button> -->
+<!-- 				</div> -->
+				<div class="col-sm-4"> 
+					<a class="pointer" ng-click="selectDocument('addressproof')"  data-toggle="modal" data-target="#viewuploadeddocumentsmodal">View Address Proof</a> 
+				</div>
+
+
+			</div>   
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">Upload ID proof:</label>
+				<div class="col-sm-6">
+<!-- 					<textarea class="form-control" rows="2" cols="50" placeholder="Copy and paste here your ID proof"  ng-model="account.kyc.idProof"></textarea> -->
+								<input  type="file" id="idproof" onchange="angular.element(this).scope().uploadKycDocuments(this)">
+				
+				</div>
+<!-- 				<div class="col-sm-2">OR</div> -->
+<!-- 				<div class="col-sm-4"> -->
+<!-- 					<button type="button" class="btn btn-primary" ng-click="savePrimaryInfo()">Upload</button> -->
+<!-- 				</div> -->
+
+				<div class="col-sm-4"> 
+					<a class="pointer" ng-click="selectDocument('idproof')"  data-toggle="modal" data-target="#viewuploadeddocumentsmodal">View Id Proof</a> 
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">Upload cancelled cheque:</label>
+				<div class="col-sm-6">
+<!-- 					<textarea class="form-control" rows="2" cols="50" placeholder="Copy and paste here your cancelled cheque"  ng-model="account.kyc.cancelledCheque"></textarea> -->
+								<input  type="file" id="cancelledcheque" onchange="angular.element(this).scope().uploadKycDocuments(this)">
+				</div>
+<!-- 				<div class="col-sm-2">OR</div> -->
+<!-- 				<div class="col-sm-4"> -->
+<!-- 					 <button type="button" class="btn btn-primary" ng-click="savePrimaryInfo()">Upload</button> -->
+<!-- 				</div> -->
+				<div class="col-sm-4"> 
+					<a class="pointer" ng-click="selectDocument('cancelledcheque')"  data-toggle="modal" data-target="#viewuploadeddocumentsmodal">View Cancelled Cheque</a> 
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-10">
+					<button type="button" class="btn btn-primary" ng-click="saveKYCInfo()">Save</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class="modal fade" id="viewuploadeddocumentsmodal" tabindex="-1" role="dialog"
+	arialabelby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			
+			<div class="modal-body">
+				<p>
+				<img style="width:570px" src="{{selectedDocument}}"/>
+				</p>
+
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+<script language="javascript" type="text/javascript">
+        $(function () {
+            $("#fileupload").change(function () {
+                if (typeof (FileReader) != "undefined") {
+                    var dvPreview = $("#dvPreview");
+                    dvPreview.html("");
+                    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                    $($(this)[0].files).each(function () {
+                        var file = $(this);
+                        if (regex.test(file[0].name.toLowerCase())) {
+                            var reader = new FileReader();
+                            reader.onload = function (e) {
+                                var img = $("<img />");
+                                img.attr("style", "height:100px;width: 100px");
+                                img.attr("src", e.target.result);
+                                dvPreview.append(img);
+                            }
+                            reader.readAsDataURL(file[0]);
+                        } else {
+                            alert(file[0].name + " is not a valid image file.");
+                            dvPreview.html("");
+                            return false;
+                        }
+                    });
+                } else {
+                    alert("This browser does not support HTML5 FileReader.");
+                }
+            });
+        });
+    </script>
+
+

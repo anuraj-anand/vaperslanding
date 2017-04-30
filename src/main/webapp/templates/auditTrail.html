@@ -1,0 +1,235 @@
+<body ng-app="orderbid">
+	<h2 align="center">Audit Trail</h2>
+	<div class="container"   ng-if="loggedIn.company.type==1">
+	<div class="table-responsive" id="EOrder" ng-init="getEsselerorder()">
+		<table class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+
+
+					<th>order.No.</th>
+					<th>Item symbol</th>
+					<th>Shipment date</th>
+					<th>Delivery date</th>
+					<th>Pkg weight</th>
+
+
+				</tr>
+			</thead>
+			<tbody>
+
+				<!-- <button type="button" class="btn btn-info btn-lg"
+					data-toggle="modal" data-target="#myModal">Open Large
+					Modal</button> -->
+				<!-- <tr ng-show="orders.length <= 0"><td colspan="16" style="text-align:center;">Loading Please wait!!</td></tr -->
+				<tr ng-repeat="item in esselerorder">
+
+					<td><a data-toggle="modal" data-target="#myModal"
+						ng-click="getOrderDetailsByNo(item)">{{item.orderNo}} </a></td>
+
+					<td>{{item.itemSymbol}}</td>
+					<td>{{item.shipmentDate | date:'shortDate'}}</td>
+					<td>{{item.deliveryDate | date:'shortDate'}}</td>
+					<td>{{item.weight}}</td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	</div>
+	
+	
+	<div class="container" ng-if="loggedIn.company.type==0">
+	<button type="button" id="ebtn" ng-click="getAdminOrder()" class="btn btn-primary">Esseler Order</button>
+	<button type="button"  ng-click="getAdminBidOrder();" class="btn btn-primary">Logistic Order</button>
+	
+	<div class="table-responsive" id="EOrder" style="display: none;">
+		<table class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+
+
+					<th>order.No.</th>
+					<th>Item symbol</th>
+					<th>Shipment date</th>
+					<th>Delivery date</th>
+					<th>Pkg weight</th>
+
+
+				</tr>
+			</thead>
+			<tbody>
+
+				<!-- <button type="button" class="btn btn-info btn-lg"
+					data-toggle="modal" data-target="#myModal">Open Large
+					Modal</button> -->
+				<!-- <tr ng-show="orders.length <= 0"><td colspan="16" style="text-align:center;">Loading Please wait!!</td></tr -->
+				<tr ng-repeat="item in getAdminOrder">
+
+					<td><a data-toggle="modal" data-target="#myModal"
+						ng-click="getOrderDetailsByNo(item)">{{item.orderNo}} </a></td>
+
+					<td>{{item.itemSymbol}}</td>
+					<td>{{item.shipmentDate | date:'shortDate'}}</td>
+					<td>{{item.deliveryDate | date:'shortDate'}}</td>
+					<td>{{item.weight}}</td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<div class="table-responsive" id="lOrder" >
+		<table class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+
+
+					<th>Bid.No.</th>
+					<th>Order No</th>
+					<th>Bid Qty</th>
+					<th>Bid Amount</th>
+					<th>Bid Status</th>
+					<th>Bid Time</th>
+					<th>Bidder Id</th>
+
+
+				</tr>
+			</thead>
+			<tbody>
+
+				
+				<tr ng-repeat="item in getAdminBidOrder">
+
+					<td><a data-toggle="modal" data-target="#myModal"
+						ng-click="getOrderDetailsByNo(item)">{{item.id}} </a></td>
+					<td>{{item.orderNo}}</td>
+					<td>{{item.bidQty}}</td>
+					<td>{{item.bidAmt}}</td>
+					<td>{{item.bidStatus}}</td>
+					<td>{{item.bidTime | date:'shortDate'}}</td>
+					<td>{{item.bidderId}}</td>
+					
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	</div>
+	
+
+	
+	
+	
+	<div class="container"  ng-if="loggedIn.company.type==2">
+	<div class="table-responsive" id="lOrder" ng-init="getlogisticOrder()">
+		<table class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+
+
+					<th>Bid.No.</th>
+					<th>Order No</th>
+					<th>Bid Qty</th>
+					<th>Bid Amount</th>
+					<th>Bid Status</th>
+					<th>Bid Time</th>
+					<th>Bidder Id</th>
+
+
+				</tr>
+			</thead>
+			<tbody>
+
+				
+				<tr ng-repeat="item in getlogisticOrder">
+
+					<td><a data-toggle="modal" data-target="#myModal"
+						ng-click="getOrderDetailsByNo(item)">{{item.id}} </a></td>
+					<td>{{item.orderNo}}</td>
+					<td>{{item.bidQty}}</td>
+					<td>{{item.bidAmt}}</td>
+					<td>{{item.bidStatus}}</td>
+					<td>{{item.bidTime | date:'shortDate'}}</td>
+					<td>{{item.bidderId}}</td>
+					
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	</div>
+
+
+	<!-- Trigger the modal with a button -->
+
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title" align="center">Your Audit Trails For Order No-:{{details.orderNo}} </h4>
+				</div>
+				<div class="modal-body">
+					<table class="table table-striped table-bordered table-hover">
+							<tr>
+								<th>Source Address</th>
+								<th>Source Pin</th>
+      							<th>Dest Address</th>
+								<th>Dest Pin</th>
+								<th>Priority</th>
+								<th>Ask Quantity</th>
+
+
+							</tr>
+							<tr>
+
+
+								<td>{{details.sourceAddress}}</td>
+								<td>{{details.sourcePin}}</td>
+								<td>{{details.destAddress}}</td>
+								<td>{{details.destPin}}</td>
+								<td>{{details.additionalFields}}</td>
+								<td>{{details.uuid}}</td>
+								
+								
+
+							</tr>
+							<tr>
+								<th>Order Date</th>
+								<th>Weight</th>
+      							<th>Item Symbol</th>
+								<th>Company Name</th>
+								<th>Delivery Days</th>
+								<th>Uuid</th>
+
+
+							</tr>
+							
+							<tr>
+
+
+								<td>{{details.orderDate | date:'shortDate'}}</td>
+								<td>{{details.weight}}</td>
+								<td>{{details.itemSymbol}}</td>
+								<td>{{details.comapnyVo.name}}</td>
+								<td>{{details.deliveryDays}}</td>
+								<td>{{details.askQuantity}}</td>
+								
+								
+
+							</tr>
+
+					</table>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>

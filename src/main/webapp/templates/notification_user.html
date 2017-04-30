@@ -1,0 +1,67 @@
+<!-- RSA Security -->
+<script type="text/javascript" src="components/rsa/jsbn.js"></script>
+<!--needed for rsa math operations-->
+<script type="text/javascript" src="components/rsa/rng.js"></script>
+<!--needed for rsa key generation-->
+<script type="text/javascript" src="components/rsa/prng4.js"></script>
+<!--needed for rsa key generation-->
+<script type="text/javascript" src="components/rsa/rsa.js"></script>
+
+<script src="components/angular/angular.js"></script>
+
+
+
+
+<!-- RSA Security -->
+
+
+<h2 align="center">Notification Message</h2>
+
+
+<div class="panel panel-success" ng-init="getNotificationMessage();">
+	
+	<div class="table-responsive">
+
+
+
+
+<table class="table">
+<thead>
+    <tr>
+        
+        <th>Message</th>
+        <th>Last_Modified_Time</th>
+    </tr>
+    </thead>
+    
+
+<!-- <div ng-repeat="week in getResult.usernames"> -->
+   
+   <tbody ng-repeat="week in getResult.usernames">
+   <tr>
+   
+    <td>{{week.bmessage}}</td>
+  
+   
+    </tr>    
+      
+     </tbody>
+   
+  
+   </table>
+   
+</div>
+
+		
+
+
+
+
+
+
+
+
+
+
+	</div>
+

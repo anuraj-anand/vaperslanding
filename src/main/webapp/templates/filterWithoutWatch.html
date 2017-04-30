@@ -1,0 +1,325 @@
+
+<div class="filter-box">
+
+	<div class="pull-left col-lg-6 col-md-6 col-sm-6">
+		<input ng-if="loggedIn.company.type!=1" type="checkbox" name="selectAllcheck" class="pull-left" id="selectAllCheck" ng-click="selectAllOrder()"/> 
+		
+	<a id="filter" title="filter" class="pull-left" ng-if="loggedIn.company.type==1" ng-click="openNewOrder()"><i class="fa fa-filter"></i></a> 
+	<a id="filter" title="filter" class="pull-left" ng-if="loggedIn.company.type==2" ng-click="openNewOrder()"><i class="fa fa-filter"></i></a> 
+		
+		<a href="#" title="sort" class="pull-left"><i class="fa fa-sort-amount-desc"></i></a>
+		<!-- <a href="#" class="pull-left blue">EDIT</a> -->
+	</div>
+
+	<div class="pull-right col-lg-6 col-md-6 col-sm-6">
+		<a id="createNew" class="blue pull-right" ng-if="loggedIn.company.type==1" ng-click="openNewOrderPopup()">NEW ORDER</a> 
+		<a id="importOrder" class="blue pull-right"	style="margin-right: 10px;" ng-if="loggedIn.company.type==1" ng-click="openImportPopup()">IMPORT</a> 
+		<input type="search" name="search" class="pull-right" placeholder="search">
+	</div>
+
+</div>
+
+<div class="modal fade" id="createNewOrder" tabindex="-1" role="dialog"
+	arialabelby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span arial-hidden="true" class="fa fa-times"></span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">Add Order</h4>
+			</div>
+			<div class="modal-body">
+
+				<form action="" name="">
+					<ul class="form-box">
+						<li><input type="text" placeholder="Item symbol" ng-model="orderwrapper.order.itemSymbol" required></li>
+						<li><input type="text" placeholder="Order no." ng-model="orderwrapper.order.orderNo" required></li>
+					<!-- 	<li><input type="text" placeholder="Logistics Name"></li>
+						<li><input type="text" placeholder="Order ID"></li> -->
+						<li>
+							<textarea rows="3" cols="" placeholder="Source address" class="width50 pull-left" ng-model="orderwrapper.order.sourceAddress" required></textarea>
+							<textarea rows="3" cols="" placeholder="Destination address" class="width50 pull-right" ng-model="orderwrapper.order.destAddress" required></textarea>
+						</li>
+						<li>
+							<input type="text" placeholder="Source pin code" class="width50 pull-left" ng-model="orderwrapper.order.sourcePin" required/> 
+							<input type="text" placeholder="Destination pin code" class="width50 pull-right" ng-model="orderwrapper.order.destPin" required/>
+						</li>
+						<li><input type="text" placeholder="Package weight" ng-model="orderwrapper.order.weight" required></li>
+						<li>
+							<input type="text" placeholder="Ask quantity" class="width50 pull-left" ng-model="orderwrapper.order.askQuantity" required/> 
+							<input type="text" placeholder="Ask rate" class="width50 pull-right" ng-model="orderwrapper.order.askRate" required/>
+						</li>
+						<!-- <li>
+							<input type="text" placeholder="Bid quantity" class="width50 pull-left" ng-model="order.bidQ" required/> 
+							<input type="text" placeholder="Bid rate" class="width50 pull-right" ng-model="order.destPin" required/>
+						</li> -->
+						<li>
+							<select id="orderType" ng-model="orderwrapper.order.type" required placeholder="Order type">
+								<option value="fragile">FRAGILE</option>
+								<option value="normal">NORMAL</option>
+								<option value="truck_load">TRUCK LOAD</option>
+								<option value="one_day">ONE DAY</option>
+								<option value="two_day">TWO DAY</option>
+							</select>
+						</li>
+							<li> 
+							<div class="width50 pull-left input-group date" id="shipmentDate">
+				                <input type="text" data-format="dd/MM/yyyy" id="shipmentDate" class="" placeholder="Shipment date" ng-model="orderwrapper.order.shipmentDate" required/>
+				                <span class="input-group-addon">
+				                    <span class="glyphicon glyphicon-calendar"></span>
+				                </span>
+				            </div>
+				            <div class="width50 pull-right input-group date" id="deliveryDate">
+				                <input type="text" data-format="dd/MM/yyyy" id="deliveryDate" class="" placeholder="Delivery date" ng-model="orderwrapper.order.deliveryDate" required/>
+				                <span class="input-group-addon">
+				                    <span class="glyphicon glyphicon-calendar"></span>
+				                </span>
+				            </div>
+				       </li>
+					</ul>
+				</form>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary pull-right"
+					data-dismiss="modal" aria-label="Close" ng-click="addOrder()">Update</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="ImportOrderPopup" tabindex="-1"
+	role="dialog" arialabelby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span arial-hidden="true" class="fa fa-times"></span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">Import Orders</h4>
+			</div>
+			<div class="modal-body">
+				<form action="" name="">
+					<span>Please use this <a href="/orderbid/order_sample.xlsx">sample file</a> to fill your order.You can use upload xls, xlsx files</span>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<input type="file" nv-file-select="" uploader="uploader"/>
+				<table class="table">
+                       <!--  <thead>
+                            <tr>
+                                <th width="50%">Name</th>
+                                <th ng-show="uploader.isHTML5">Size</th>
+                                <th ng-show="uploader.isHTML5">Progress</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead> -->
+                        <tbody>
+                            <tr ng-repeat="item in uploader.queue">
+                                <td align="left"><strong>{{ item.file.name }}</strong></td>
+                                <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                <td ng-show="uploader.isHTML5">
+                                    <div class="progress" style="margin-bottom: 0;">
+                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                </td>
+                                <td nowrap>
+                                    <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                        <span class="glyphicon glyphicon-upload"></span> Upload
+                                    </button>
+                                   <!--  <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                        <span class="glyphicon glyphicon-trash"></span> Remove
+                                    </button> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- <!-- 
+//filter Coding
+<div class="modal fade" id="filtermodel" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Modal Header</h4>
+			</div>
+			<div class="modal-body">
+				<form role="form">
+					<div class="form-group">
+						<label for="sel1"></label> <select class="form-control" id="sel1" ng-model="orderwrapper.option">
+							<option>From Zip Code</option>
+							<option>To Zip Code</option>
+							<option>By Product Name</option>
+							<option>By Shipping Date</option>
+							<option>To Delivery Date</option>
+							<option>By Shipping Priority</option>
+							<option>By Quantity Shipping Date</option>
+
+
+						</select> 
+						
+						
+						<br>
+
+
+					</div>
+					
+					<div class="form-group">
+     
+      <input class="form-control input-lg" id="inputsm" type="text">
+    </div>
+					
+				</form>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-default" data-dismiss="modal" style="background-color:#0b60a8;"ng-click="getOptionSelected()">Submit</button>
+				</div>
+			</div>
+	</div>
+	</div>
+
+
+
+</div>
+ --> 
+ 
+ 
+ 
+ <div class="modal fade" id="filtermodel" tabindex="-1" role="dialog"
+	arialabelby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span arial-hidden="true" class="fa fa-times"></span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">Filter</h4>
+			</div>
+			<div class="modal-body">
+				<form>
+					  <div class="form-group row">
+					    <label class="col-sm-4 form-control-label">By zip code</label>
+					    <div class="col-sm-4">
+					     	<input type="text" class="form-control" id="sourceZip" placeholder="Enter source zip" ng-model="orderFilter.fromZip"/>
+					    </div>
+					    <div class="col-sm-4">
+					     	<input type="text" class="form-control" id="destZip" placeholder="Enter destination zip" ng-model="orderFilter.toZip"/>
+					    </div>
+					  </div>
+					  <div class="form-group row">
+					    <label for="inputPassword" class="col-sm-4 form-control-label">By Order no.</label>
+					    <div class="col-sm-8">
+					      <input type="text" class="form-control" id="orderNo" placeholder="Order no" ng-model="orderFilter.orderNo"/>
+					    </div>
+					  </div>
+					  <div class="form-group row">
+					    <label for="inputPassword" class="col-sm-4 form-control-label">By Shipping priority</label>
+					    <div class="col-sm-8">
+					      <select id="orderType" ng-model="orderFilter.shippingPriority" required placeholder="Order type">
+								<option value="fragile">FRAGILE</option>
+								<option value="normal">NORMAL</option>
+								<option value="truck_load">TRUCK LOAD</option>
+								<option value="one_day">ONE DAY</option>
+								<option value="two_day">TWO DAY</option>
+							</select>
+					    </div>
+					  </div>
+					  <div class="form-group row">
+					    <label for="inputPassword" class="col-sm-4 form-control-label">By Product name</label>
+					    <div class="col-sm-8">
+					      <input type="text" class="form-control" id="productName" placeholder="Enter product name" ng-model="orderFilter.productName"/>
+					    </div>
+					  </div>
+					  <div class="form-group row">
+					    <label class="col-sm-4 form-control-label">By ask price</label>
+					    <div class="col-sm-4">
+					     	<input type="text" class="form-control" id="higestAskPrice" placeholder="Lower ask price" ng-model="orderFilter.lowestAskPrice"/>
+					    </div>
+					    <div class="col-sm-4">
+					     	<input type="text" class="form-control" id="lowestAskPrice" placeholder="Highest ask price" ng-model="orderFilter.highestAskPrice"/>
+					    </div>
+					  </div>
+				</form>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary"
+					data-dismiss="modal" aria-label="Close" ng-click="getOptionSelected()">Submit</button>
+					<button type="button" class="btn btn-primary"
+					data-dismiss="modal" aria-label="Close" ng-click="getOptionSelected()">Cancel</button>
+					<button type="button" class="btn btn-primary"
+					data-dismiss="modal" aria-label="Close" ng-click="getOptionSelected()">Clear</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="bidOrder" tabindex="-1" role="dialog" arialabelby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span arial-hidden="true" class="fa fa-times"></span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">Add your bid</h4>
+			</div>
+			<div class="modal-body">
+				
+				<form action="" name="">
+					<span>{{bidError}}</span>
+					<input type="hidden" ng-model="bid.orderNo"/>
+					<ul class="form-box">
+						<li>
+							<input type="text" placeholder="Enter your bid price"  class="width70 pull-left" ng-model="bid.bidAmt" required/>&nbsp; Rs.
+						</li>
+						<!-- bid quantity is hidden at this moement as it is not implemnted yet. -->
+						<!-- <li>
+							<input type="text" placeholder="Enter your bid quantity"  class="width70 pull-left" ng-model="bid.bidQty" required/>
+						</li> -->
+					</ul>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary pull-right"
+					aria-label="Close" ng-click="addBid()">Update</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	$(document).ready(function() {
+		var header = $('header').height();
+		var footer = $('footer').height();
+		var main = $(document).height();
+		var totalHeight = main - header - footer - 92;
+	//	$('.side-menu').css('height', totalHeight + 'px');
+		//$('#expStartDate').datetimepicker();
+		//$('#expEndDate').datetimepicker();
+		//$('#delDate').datetimepicker();
+	}); 
+	
+	 $(function () {
+         $('#shipmentDate').datetimepicker();
+         $('#deliveryDate').datetimepicker();
+         $('#delDate').datetimepicker();
+     });
+</script>
+
+

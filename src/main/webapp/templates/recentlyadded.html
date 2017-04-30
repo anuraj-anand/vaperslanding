@@ -1,0 +1,93 @@
+<h2>Recently updated Orders</h2>
+
+<div class="data-container">
+
+	<div ng-include="'templates/filterWithoutWatch.html'"></div>
+	<div class="table-responsive" ng-init="getAutoQualified()">          
+	  <table class="table table-striped table-bordered table-hover">
+	    <thead>
+	      <tr>
+	        <th>Sr.No.</th>
+	        <th>Item symbol</th>
+	        <th>Shipment date</th>
+	        <th>Delivery date</th>
+	        <th>Pkg weight</th>
+	        <th>Zip from</th>
+	        <th>Zip to</th>
+	        <th>Ask Qty</th>
+	        <th>Ask Rate</th>
+	        <th>Bid Qty</th>
+	        <th>Bid Rate</th>
+	        <th>Time</th> 
+	        <th>Last bid price</th>       
+	        <th>Delivery days</th> 
+	        <th>Code</th>      
+	        <th ng-if="loggedIn.company.type!=1">Actions</th>       
+	      </tr>
+	    </thead>
+	    <tbody>
+	    	<tr ng-show="orders.length <= 0"><td colspan="16" style="text-align:center;">Loading Please wait!!</td></tr>
+	      	<tr dir-paginate="order in autoQualifiedOrders|itemsPerPage:itemsPerPage" total-items="total_count">
+		        <td>{{order.srNo}}</td>
+		        <td>{{order.itemSymbol}}</td>
+		        <td>{{order.shipmentDate | date:'shortDate'}}</td>
+		        <td>{{order.deliveryDate | date:'shortDate'}}</td>
+		        <td>{{order.weight}} G</td>
+		        <td>{{order.sourcePin}}</td>
+		        <td>{{order.destPin}}</td>
+		        <td class="info">{{order.askQuantity}}</td>
+		        <td class="info">{{order.askRate}} Rs.</td>
+		        <td class="danger">{{order.maxBidVO.bidQuanitity}}</td>
+		        <td class="danger">{{order.maxBidVO.bidAmt}}&nbsp;Rs.</td>
+		        <td>1:12:40</td>
+		        <td><p ng-if="loggedIn.company.type!=1"><span ng-if="order.maxUserBidVO != null">{{order.maxUserBidVO.bidAmt}}&nbsp;Rs.</span></p></td>
+		        <td>{{order.deliveryDays}}</td>
+		        <td>{{order.uuid}}</td>
+		        <td ng-if="loggedIn.company.type!=1"><span class="blue-box" ng-click="openBidPopup(order.orderNo, order.maxBidVO.bidAmt, order.maxUserBidVO.bidAmt, order.askRate)">Bid</span></td>
+		      </tr>
+	    </tbody>
+	  </table>
+	</div>
+	<!-- <table class="grid" ng-init="getAutoQualified()">
+
+		<tbody>
+			<tr ng:repeat="order in orders">
+				<td><input type="checkbox" name="check" id="{{order.id}}"></td>
+				<td><span class="user-icon"><i class="fa fa-user"></i></span>
+				<td>
+				<td class="truck-icon"><p>
+						{{order.comapnyVo.name}} - <span class="subtitle">{{order.orderNo}}</span>
+					</p>
+					<p>{{order.sourceAddress}}</p> <span class="subtitle">{{order.sourcePin}}</span></td>
+
+				<td><p>
+						Pkg Weight - <strong>{{order.weight}} G</strong>
+					</p>
+					<p>{{order.destAddress}}</p>
+					<span class="subtitle">{{order.destPin}}</span></td>
+				<td>Ask Price- <span class="subtitle">{{order.askPrice}} Rs.</span>
+					<p>
+						Time Remaining - <span class="subtitle-1">01:10:22</span>
+					</p>
+					<p>
+						Date - <span class="subtitle-1">{{order.deliveryDate | date:'medium'}}</span>
+					</p></td>
+				<td>
+					<span ng-if="order.maxBidVO != null">Best bid <span class="title">{{order.maxBidVO.bidAmt}}&nbsp;Rs.</span></span>
+					<span ng-if="order.maxBidVO == null">No bids yet.</span>
+					<p>
+						<span class="blue-box" ng-if="loggedIn.company.type!=1">Bid</span>
+					</p>
+					<p ng-if="loggedIn.company.type!=1"><span ng-if="order.maxUserBidVO != null">{{order.maxUserBidVO.bidAmt}}&nbsp;Rs. by you</span></p>
+				</td>
+			</tr>
+		</tbody>
+	</table> -->
+
+<dir-pagination-controls
+		max-size="8"
+		direction-links="true"
+		boundary-links="true" 
+		on-page-change="getData(newPageNumber)" >
+	</dir-pagination-controls>
+</div>
